@@ -6,4 +6,5 @@ django-tinymce==4.0.0
 djangorestframework==3.15.1
 djangorestframework-simplejwt==5.3.1
 PyJWT==2.8.0
+shortuuid==1.0.13
 sqlparse==0.5.0
