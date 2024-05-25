@@ -64,6 +64,26 @@ class Product(models.Model):
     def product_rating(self):
         product_rating = Review.objects.filter(product=self).aggregate(avg_rating=models.Avg("rating"))
         return product_rating['avg_rating']
+    
+    def rating_count(self):
+        rating_count = Review.objects.filter(product=self).count()
+        return rating_count
+    
+    def gallery(self):
+        gallery = Gallery.objects.filter(gallery_product=self)
+        return gallery
+    
+    def specification(self):
+        specification = Specification.objects.filter(specification_product=self)
+        return specification
+    
+    def size(self):
+        size = Size.objects.filter(size_product=self)
+        return size
+    
+    def color(self):
+        color = Color.objects.filter(color_product=self)
+        return color
 
 
 class Gallery(models.Model):
@@ -86,7 +106,7 @@ class Specification(models.Model):
         return self.title
     
 class Size(models.Model):
-    specification_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    size_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     name = models.CharField(max_length=1000)
     price = models.DecimalField(decimal_places=0, max_digits=20, default=0.00)
 
@@ -95,7 +115,7 @@ class Size(models.Model):
     
 
 class Color(models.Model):
-    specification_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     name = models.CharField(max_length=1000)
     color_code = models.CharField(max_length=1000)
 
