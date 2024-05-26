@@ -57,13 +57,18 @@ class Product(models.Model):
         if self.slug == "" or self.slug == None:
             self.slug = slugify(self.name)
         
-        self.rating = self.product_rating()
+        # self.rating = self.product_rating()
 
         super(Product, self).save(*args, **kwargs)
 
     def product_rating(self):
         product_rating = Review.objects.filter(product=self).aggregate(avg_rating=models.Avg("rating"))
         return product_rating['avg_rating']
+    
+    def save(self, *args, **kwargs):
+        if self.rating:
+            self.rating = self.product_rating()
+        super(Product, self).save(*args, **kwargs)
     
     def rating_count(self):
         rating_count = Review.objects.filter(product=self).count()
@@ -309,3 +314,17 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+    
+
+class Tax(models.Model):
+    country  = models.CharField(max_length=100)
+    rate = models.IntegerField(default=5, help_text="numbers added here are in percentage")
+    active = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.country
+    
+    class Meta:
+        verbose_name_plural = "Taxes"
+        ordering = ["country"]
