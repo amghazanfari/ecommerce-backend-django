@@ -61,10 +61,10 @@ class CartAPIView(generics.ListCreateAPIView):
         else:
             tax_rate = 0
 
-        cart = Cart.objects.filter(cart_id=cart_id, product=product).first()
+        cart = Cart.objects.filter(cart_id=cart_id, cart_product=product).first()
 
         if cart:
-            cart.product = product
+            cart.cart_product = product
             cart.user = user
             cart.qty = qty
             cart.price = price
@@ -77,7 +77,7 @@ class CartAPIView(generics.ListCreateAPIView):
             cart.cart_id = cart_id
 
             service_fee_percentage = 0.1
-            cart.service_fee = service_fee_percentage * cart.sub_total
+            cart.service_fee = Decimal(service_fee_percentage) * cart.sub_total
             cart.total = cart.sub_total + cart.shipping_amount + cart.service_fee + cart.tax_fee
             cart.save()
 
@@ -85,7 +85,7 @@ class CartAPIView(generics.ListCreateAPIView):
         else:
             cart = Cart()
 
-            cart.product = product
+            cart.cart_product = product
             cart.user = user
             cart.qty = qty
             cart.price = price
@@ -98,7 +98,7 @@ class CartAPIView(generics.ListCreateAPIView):
             cart.cart_id = cart_id
 
             service_fee_percentage = 0.1
-            cart.service_fee = service_fee_percentage * cart.sub_total
+            cart.service_fee = Decimal(service_fee_percentage) * cart.sub_total
             cart.total = cart.sub_total + cart.shipping_amount + cart.service_fee + cart.tax_fee
             cart.save()
             return Response({'message': 'cart created successfully'}, status=status.HTTP_200_OK)

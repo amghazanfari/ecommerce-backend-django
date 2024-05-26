@@ -57,8 +57,6 @@ class Product(models.Model):
         if self.slug == "" or self.slug == None:
             self.slug = slugify(self.name)
         
-        # self.rating = self.product_rating()
-
         super(Product, self).save(*args, **kwargs)
 
     def product_rating(self):
@@ -130,7 +128,7 @@ class Color(models.Model):
 
 class Cart(models.Model):
     cart_product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     qty = models.PositiveIntegerField(default=0)
     price = models.DecimalField(default=0.00, max_digits=20, decimal_places=0)
     sub_total = models.DecimalField(default=0.00, max_digits=20, decimal_places=0)
