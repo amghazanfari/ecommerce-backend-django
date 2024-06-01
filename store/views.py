@@ -231,6 +231,7 @@ class CreateOrderAPIView(generics.CreateAPIView):
         total_total = Decimal(0.0)
 
         order = CartOrder.objects.create(
+            buyer=user,
             full_name=full_name,
             email=email,
             mobile=mobile,
