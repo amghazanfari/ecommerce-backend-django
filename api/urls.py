@@ -20,4 +20,6 @@ urlpatterns = [
     path("cart-list/<str:cart_id>/", store_views.CartListView.as_view(), name="CartListViewWithoutUserID"),
     path("cart-detail/<str:cart_id>/<int:user_id>/", store_views.CartDetailView.as_view(), name="CartDetailViewWithUserID"),
     path("cart-detail/<str:cart_id>/", store_views.CartDetailView.as_view(), name="CartDetailViewWithoutUserID"),
+    path("cart-detail/<str:cart_id>/<int:item_id>/<int:user_id>/", store_views.CartItemDeleteAPIView.as_view(), name="CartItemDeleteAPIViewwWithUserID"),
+    path("cart-detail/<str:cart_id>/<int:item_id>/", store_views.CartItemDeleteAPIView.as_view(), name="CartItemDeleteAPIViewwWithoutUserID"),
 ]
