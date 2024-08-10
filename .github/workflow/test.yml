@@ -1,0 +1,26 @@
+name: Test Runner
+
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: self-hosted  # Specify that this job should run on your self-hosted runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run a simple command
+        run: echo "Hello, this is a test to check the GitHub Actions runner!"
+
+      - name: List directory contents
+        run: ls -la
+
+      - name: Check GitHub runner version
+        run: echo "GitHub Actions runner version: $RUNNER_VERSION"
+
