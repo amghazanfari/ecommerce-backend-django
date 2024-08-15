@@ -21,11 +21,9 @@ jobs:
         run: sw_vers
 
   dependant-job:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs:
       - run-shell-command
     steps:
-      - name: echo a string
-        run: Write-Output "windows string"
       - name: Error step
         run: echo "::error:: message has error"
