@@ -28,4 +28,4 @@ jobs:
       - name: echo a string
         run: Write-Output "windows string"
       - name: Error step
-        run: doesnotexists
+        run: echo "::error:: message has error"
