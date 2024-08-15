@@ -13,3 +13,19 @@ jobs:
         run: |
           node -v
           npm -v
+
+  parallel-jobs-macos:
+    runs-on: macos-latest
+    steps:
+      - name: View sw version
+        run: sw_vers
+
+  dependant-job:
+    runs-on: windows-latest
+    needs:
+      - run-shell-command
+    steps:
+      - name: echo a string
+        run: Write-Output "windows string"
+      - name: Error step
+        run: doesnotexists
