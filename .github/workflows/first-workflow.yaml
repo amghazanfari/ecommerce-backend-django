@@ -26,4 +26,4 @@ jobs:
       - run-shell-command
     steps:
       - name: Error step
-        run: echo "::error::message has error"
+        run: echo "::error title=horray::message has error"
