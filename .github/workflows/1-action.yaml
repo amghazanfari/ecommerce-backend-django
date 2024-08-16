@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: simple js action
         id: greet
-        uses: actions/hello-world-javascript-action@latest
+        uses: actions/hello-world-javascript-action@v1.1
         with:
           who-to-greet: Amir
       - name: output
