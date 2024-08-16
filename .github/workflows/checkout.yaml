@@ -1,7 +1,10 @@
 name: Checkout
 
 on:
-  - push
+  push:
+  issues:
+    types:
+      - opened
 
 jobs:
   checkout_and_display_files:
