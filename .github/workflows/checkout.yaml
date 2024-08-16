@@ -9,10 +9,6 @@ jobs:
     steps:
       - name: list file before
         run: ls -a
-      - name: checkout
-        run: |
-          git init
-          git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
-          git fetch
-          git checkout main
-          ls -a
+      - uses: actions/checkout@v3
+      - name: list file after
+        run: ls -a
