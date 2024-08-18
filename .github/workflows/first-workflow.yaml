@@ -1,29 +1,11 @@
-name: First workflow
+name: first workflow
 
 on:
-  - push
+  push:
 
 jobs:
-  run-shell-command:
+  hello-world:
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
-        run: echo "hello world"
-      - name: multiline command
-        run: |
-          node -v
-          npm -v
-
-  parallel-jobs-macos:
-    runs-on: macos-latest
-    steps:
-      - name: View sw version
-        run: sw_vers
-
-  dependant-job:
-    runs-on: ubuntu-latest
-    needs:
-      - run-shell-command
-    steps:
-      - name: Error step
-        run: echo "::error title=horray::message has error"
+    - name: hello world
+      run: echo "hello world!"
