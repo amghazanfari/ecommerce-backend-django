@@ -1,0 +1,19 @@
+name: Checkout and list files
+
+on:
+  push:
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: list files before checkout
+        run: ls -l
+
+      - name: Checkout code
+        run: |
+          git clone https://github.com/${{ github.repository }}.git .
+          git checkout ${{ github.sha }}
+
+      - name: list files after checkout
+        run: ls -l
