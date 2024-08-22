@@ -11,9 +11,7 @@ jobs:
         run: ls -l
 
       - name: Checkout code
-        run: |
-          git clone https://github.com/${{ github.repository }}.git .
-          git checkout ${{ github.sha }}
+        uses: actions/checkout@v3
 
       - name: list files after checkout
         run: ls -l
